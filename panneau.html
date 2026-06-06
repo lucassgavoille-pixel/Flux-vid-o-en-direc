@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Panneau</title>
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#111;
+color:white;
+}
+button{
+font-size:25px;
+padding:15px;
+margin:10px;
+width:250px;
+}
+</style>
+</head>
+<body>
+
+<h1>Panneau Interphone</h1>
+
+<h2 id="appel">Aucun appel</h2>
+
+<button onclick="accepter()">
+✅ Accepter
+</button>
+
+<button onclick="refuser()">
+❌ Refuser
+</button>
+
+<button onclick="ouvrirPorte()">
+🔓 Ouvrir porte
+</button>
+
+<script>
+function accepter(){
+alert("Appel accepté");
+}
+
+function refuser(){
+alert("Appel refusé");
+}
+
+function ouvrirPorte(){
+localStorage.setItem("porte","ouverte");
+alert("Porte ouverte");
+}
+
+setInterval(()=>{
+if(localStorage.getItem("appel")){
+document.getElementById("appel").innerText=
+"🔔 Quelqu'un sonne";
+}
+},1000);
+</script>
+
+</body>
+</html>
