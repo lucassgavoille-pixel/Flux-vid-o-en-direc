@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sonnette</title>
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#222;
+color:white;
+}
+video{
+width:90%;
+max-width:500px;
+border-radius:10px;
+}
+button{
+font-size:30px;
+padding:20px;
+margin:20px;
+}
+</style>
+</head>
+<body>
+
+<h1>Sonnette</h1>
+
+<video id="camera" autoplay playsinline></video>
+
+<br>
+
+<button onclick="sonner()">🔔 SONNER</button>
+
+<h2 id="etat">En attente...</h2>
+
+<script>
+const video = document.getElementById("camera");
+
+navigator.mediaDevices.getUserMedia({
+video:true,
+audio:true
+})
+.then(stream=>{
+video.srcObject = stream;
+});
+
+function sonner(){
+localStorage.setItem("appel",Date.now());
+document.getElementById("etat").innerText="Appel envoyé";
+}
+
+setInterval(()=>{
+if(localStorage.getItem("porte")=="ouverte"){
+document.getElementById("etat").innerText="✅ Accès autorisé";
+
+const audio = new Audio(
+"https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+);
+audio.play();
+
+localStorage.removeItem("porte");
+}
+},1000);
+</script>
+
+</body>
+</html>
